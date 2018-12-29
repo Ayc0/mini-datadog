@@ -8,7 +8,6 @@ const typeDefs = gql`
   type Mutation {
     addMonitoring(
       url: String!
-      hours: Int
       minutes: Int
       seconds: Int
       millis: Int
