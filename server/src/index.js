@@ -4,9 +4,12 @@ const typeDefs = require('./utils/typeDefs');
 const resolvers = require('./utils/resolvers');
 const { verifySchema, verifyEmitters } = require('./utils/verifySchema');
 const { emit } = require('./utils/actions');
+const { isProd } = require('./utils/env');
 
-verifySchema(typeDefs, resolvers);
-verifyEmitters(typeDefs, emit);
+if (!isProd) {
+  verifySchema(typeDefs, resolvers);
+  verifyEmitters(typeDefs, emit);
+}
 
 const server = new ApolloServer({
   typeDefs,
