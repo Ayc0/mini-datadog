@@ -20,6 +20,9 @@ const resolvers = {
     monitoringAdded: {
       subscribe: subscribe([types.MONITORING_ADDED]),
     },
+    resultsPerformed: {
+      subscribe: subscribe([types.RESULTS_PERFORMED]),
+    },
   },
 };
 

@@ -16,11 +16,26 @@ const typeDefs = gql`
 
   type Subscription {
     monitoringAdded: Monitoring
+    resultsPerformed: Results
   }
 
   type Monitoring {
     url: String!
     checkInterval: Int!
+  }
+
+  type Results {
+    url: String!
+    lookupDuration: Int!
+    mostFrequentStatus: Int!
+    totalRequests: Int!
+    totalDuration: Int!
+    totalErrors: Int!
+    averageServiceTime: Int!
+    p50ServiceTime: Int!
+    p90ServiceTime: Int!
+    p95ServiceTime: Int!
+    maxServiceTime: Int!
   }
 `;
 
