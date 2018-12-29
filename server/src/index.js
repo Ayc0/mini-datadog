@@ -1,7 +1,7 @@
 const { ApolloServer, PubSub } = require('apollo-server');
 
-const typeDefs = require('./typeDefs');
-const resolvers = require('./resolvers');
+const typeDefs = require('./utils/typeDefs');
+const resolvers = require('./utils/resolvers');
 
 const server = new ApolloServer({
   typeDefs,

@@ -1,10 +1,7 @@
 const { PubSub } = require('apollo-server');
 
-const { getMonitorings, addMonitoring } = require('./controllers/monitoring');
-
-const pubsub = new PubSub();
-
-const MONITORING_ADDED = 'MONITORING_ADDED';
+const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
+const { emit, subscribe, types } = require('../utils/actions');
 
 const resolvers = {
   Query: {
@@ -15,13 +12,13 @@ const resolvers = {
   Mutation: {
     addMonitoring(root, args, context) {
       const monitoring = addMonitoring(args);
-      pubsub.publish(MONITORING_ADDED, { monitoringAdded: monitoring });
+      emit.monitoringAdded(monitoring);
       return monitoring;
     },
   },
   Subscription: {
     monitoringAdded: {
-      subscribe: () => pubsub.asyncIterator([MONITORING_ADDED]),
+      subscribe: subscribe([types.MONITORING_ADDED]),
     },
   },
 };
