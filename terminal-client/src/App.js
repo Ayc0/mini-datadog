@@ -1,12 +1,7 @@
 import React from 'react';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import fetch from 'unfetch';
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
-  fetch,
-});
+import client from './client';
 
 // Rendering a simple centered box
 const App = () => (

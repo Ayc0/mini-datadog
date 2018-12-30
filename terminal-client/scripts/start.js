@@ -1,6 +1,12 @@
 const Bundler = require('parcel-bundler');
 const path = require('path');
 
+if (process.env.NODE_ENV === 'debug') {
+  // eslint-disable-next-line
+  const inspector = require('inspector');
+  global.console = inspector.console;
+}
+
 const entryFiles = path.join(__dirname, '../src/index.js');
 
 // Bundler options
