@@ -3,7 +3,7 @@ const interval = require('@libshin/interval');
 const axios = require('../utils/axios');
 const { emit } = require('../utils/actions');
 
-const { TWO_MIN, TEN_MIN } = require('../utils/times');
+const { TEN_SEC, ONE_MIN, TEN_MIN, ONE_HOUR } = require('../utils/times');
 
 const round = number => parseInt(number, 10);
 
@@ -20,8 +20,8 @@ class Results {
     this.url = url;
     this.checkInterval = checkInterval;
     this.requestTimer = null;
-    this.twoMinTimer = interval(this.summary(true), TWO_MIN);
-    this.tenMinTimer = interval(this.summary(true), TEN_MIN);
+    this.twoMinTimer = interval(this.summary(true), TEN_SEC);
+    this.tenMinTimer = interval(this.summary(true), ONE_MIN);
     this.results = [];
 
     this.startRequestTimer();
@@ -34,12 +34,14 @@ class Results {
     this.requestTimer = interval(this.performRequest, this.checkInterval);
     this.requestTimer.startNow();
   }
+
   stopRequestTimer() {
     if (this.requestTimer) {
       this.requestTimer.stop();
       this.requestTimer = null;
     }
   }
+
   stopTimers() {
     this.stopRequestTimer();
     if (this.twoMinTimer) {
@@ -76,13 +78,13 @@ class Results {
   }
 
   summary(fast = false) {
-    const lookupDuration = fast ? TWO_MIN : TEN_MIN; // 2min or 10min
+    const lookupDuration = fast ? TEN_MIN : ONE_HOUR; // 10min or 1h
     return () => {
       const instant = Date.now();
       const beforeInstant = instant - lookupDuration;
       // We duplicate the results to avoid having a new response that could modify the list
       const results = this.results.filter(
-        results => results.instant > beforeInstant,
+        result => result.instant > beforeInstant,
       );
       // Sort by ascending duration
       results.sort((a, b) => a.duration - b.duration);
@@ -91,12 +93,10 @@ class Results {
           let isError = 0;
           if (status instanceof Error) {
             isError = 1;
+          } else if (status in statuses) {
+            statuses[status] += 1;
           } else {
-            if (status in statuses) {
-              statuses[status] += 1;
-            } else {
-              statuses[status] = 1;
-            }
+            statuses[status] = 1;
           }
           return [total + duration, errors + isError, statuses];
         },

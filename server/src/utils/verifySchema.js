@@ -1,3 +1,9 @@
+/* eslint 
+  no-unused-vars: off,
+  import/no-extraneous-dependencies: off,
+  guard-for-in: off,
+  no-restricted-syntax: off,
+*/
 const kleur = require('kleur');
 
 const getQueries = ({ definitions }) =>
@@ -55,7 +61,7 @@ const verifySchema = (typeDefs, resolvers) => {
 const verifyEmitters = (typeDefs, emitters) => {
   let errors = false;
   const subscriptions = getSubscriptions(typeDefs);
-  for (let emitter in emitters) {
+  for (const emitter in emitters) {
     if (subscriptions.includes(emitter)) {
       return;
     }

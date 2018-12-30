@@ -1,0 +1,7 @@
+{
+  "extends": ["linkcs", "prettier"],
+  "rules": {
+    "prefer-destructuring": "off",
+    "no-param-reassign": "off"
+  }
+}

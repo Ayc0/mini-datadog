@@ -1,4 +1,4 @@
-const { PubSub } = require('apollo-server');
+/* eslint no-unused-vars: off */
 
 const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
 const { emit, subscribe, types } = require('../utils/actions');

@@ -1,6 +1,6 @@
 const Results = require('./results');
 
-const { TWO_MIN, ONE_MIN, TEN_MIN } = require('../utils/times');
+const { ONE_MIN, TEN_MIN } = require('../utils/times');
 
 const monitorings = {};
 
