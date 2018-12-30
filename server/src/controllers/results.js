@@ -3,8 +3,7 @@ const interval = require('@libshin/interval');
 const axios = require('../utils/axios');
 const { emit } = require('../utils/actions');
 
-const TWO_MIN = 2 * 60 * 1000;
-const TEN_MIN = 10 * 60 * 1000;
+const { TWO_MIN, TEN_MIN } = require('../utils/times');
 
 class Results {
   constructor(url, checkInterval) {
