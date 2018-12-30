@@ -2,6 +2,7 @@ const interval = require('@libshin/interval');
 
 const axios = require('../utils/axios');
 const { emit } = require('../data/actions');
+const { handleAlerts } = require('./alerts');
 
 const { TEN_SEC, ONE_MIN, TEN_MIN, ONE_HOUR } = require('../utils/times');
 
@@ -12,9 +13,9 @@ const computeMetrics = results => {
     return null;
   }
   const [totalDuration, totalErrors, differentStatuses] = results.reduce(
-    ([total, errors, statuses], { duration, status }) => {
+    ([total, errors, statuses], { duration, status, error }) => {
       let isError = 0;
-      if (status.error) {
+      if (error) {
         isError = 1;
       } else if (status in statuses) {
         statuses[status] += 1;
@@ -26,12 +27,13 @@ const computeMetrics = results => {
     [0, 0, {}],
   );
   const maxStatus = Math.max(...Object.values(differentStatuses));
-  const mostFrequentStatus = parseInt(
-    Object.keys(differentStatuses).find(
-      status => differentStatuses[status] === maxStatus,
-    ),
-    10,
-  );
+  const mostFrequentStatus =
+    parseInt(
+      Object.keys(differentStatuses).find(
+        status => differentStatuses[status] === maxStatus,
+      ),
+      10,
+    ) || 0;
   return {
     mostFrequentStatus,
     totalRequests: results.length,
@@ -145,6 +147,7 @@ class Metrics {
         lastStatus: lastResult.status,
         lastWasError: lastResult.error,
       };
+      handleAlerts(metrics);
 
       emit.metricsPerformed(metrics);
     };

@@ -12,20 +12,20 @@ const alerts = {
     at: timestamp,
     availability: float,
     errorTimeoutID: int | null,
-    resolvedTimeoutID: int | null,
+    resolutionTimeoutID: int | null,
   } */
 };
 
 const registerAlert = url => {
   const alert = alerts[url];
   // Cancel a resolution
-  if (alert.resolvedTimeoutID !== null) {
-    clearTimeout(alert.resolvedTimeoutID);
-    alert.resolvedTimeoutID = null;
+  if (alert.resolutionTimeoutID !== null) {
+    clearTimeout(alert.resolutionTimeoutID);
+    alert.resolutionTimeoutID = null;
   }
   // If there is no running alerting timeout and the error isn't already sent
   if (alert.errorTimeoutID === null && !alert.isSent) {
-    alert.resolvedTimeoutID = setTimeout(() => {
+    alert.errorTimeoutID = setTimeout(() => {
       const alertToSend = {
         at: Date.now(),
         url,
@@ -34,6 +34,7 @@ const registerAlert = url => {
       alert.isSent = true;
       alert.errorTimeoutID = null;
       alertsCache.push(alertToSend);
+      console.log('ALERT', alertToSend);
       emit.alertGenerated(alertToSend);
     }, TWO_MIN);
   }
@@ -47,16 +48,17 @@ const resolveAlert = url => {
     alert.errorTimeoutID = null;
   }
   // If alert already sent and no running resolution timeout
-  if (alert.isSent && alert.resolvedTimeoutID === null) {
-    alert.resolvedTimeoutID = setTimeout(() => {
+  if (alert.isSent && alert.resolutionTimeoutID === null) {
+    alert.resolutionTimeoutID = setTimeout(() => {
       const resolutionToSend = {
         at: Date.now(),
         url,
         availability: alert.availability,
       };
+      console.log('RESOLVE', resolutionToSend);
       emit.alertResolved(resolutionToSend);
       alert.isSent = false;
-      alert.resolvedTimeoutID = null;
+      alert.resolutionTimeoutID = null;
 
       // Remove alert from cache
       const alertCacheIndex = alertsCache.findIndex(a => a.url === url);
@@ -71,7 +73,7 @@ const handleAlerts = metrics => {
   if (!(url in alerts)) {
     alerts[url] = {
       errorTimeoutID: null,
-      resolvedTimeoutID: null,
+      resolutionTimeoutID: null,
       isSent: false,
     };
   }
