@@ -1,0 +1,7 @@
+{
+  "extends": ["linkcs-react", "prettier"],
+  "rules": {
+    "prefer-destructuring": "off",
+    "no-param-reassign": "off"
+  }
+}
