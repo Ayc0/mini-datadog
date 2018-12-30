@@ -1,12 +1,16 @@
 /* eslint no-unused-vars: off */
 
 const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
+const { getAlerts } = require('../controllers/alerts');
 const { emit, subscribe, types } = require('./actions');
 
 const resolvers = {
   Query: {
     getMonitorings(root, args, context) {
       return getMonitorings();
+    },
+    getAlerts(root, args, context) {
+      return getAlerts();
     },
   },
   Mutation: {

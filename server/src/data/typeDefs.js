@@ -5,6 +5,7 @@ const typeDefs = gql`
 
   type Query {
     getMonitorings: [Monitoring]
+    getAlerts: [Alert]
   }
 
   type Mutation {
