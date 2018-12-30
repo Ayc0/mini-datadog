@@ -4,15 +4,15 @@
 
 - [ ] Create a console program to monitor performance and availability of websites
 - [x] Websites and check intervals are user defined
-- [ ] Users can keep the console app running and monitor the websites
+- [x] Users can keep the console app running and monitor the websites
 
 ## Stats
 
 - [x] Check the different websites with their corresponding check intervals
   - [x] Compute a few interesting metrics: availability, max/avg response times, response codes count and more...
   - [ ] Over different timeframes: 2 minutes and 10 minutes
-- [ ] Every 10s, display the stats for the past 10 minutes for each website
-- [ ] Every minute, displays the stats for the past hour for each website
+- [x] Every 10s, display the stats for the past 10 minutes for each website
+- [x] Every minute, displays the stats for the past hour for each website
 
 ## Alerting
 

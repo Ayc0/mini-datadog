@@ -14,7 +14,7 @@ const computeMetrics = results => {
   const [totalDuration, totalErrors, differentStatuses] = results.reduce(
     ([total, errors, statuses], { duration, status }) => {
       let isError = 0;
-      if (status instanceof Error) {
+      if (status.error) {
         isError = 1;
       } else if (status in statuses) {
         statuses[status] += 1;
@@ -100,16 +100,19 @@ class Metrics {
 
   saveResponse(status, duration) {
     const instant = Date.now();
-    this.results.push({
-      instant,
-      status,
+    const result = {
+      at: instant,
+      status: status instanceof Error ? 0 : status,
+      error: status instanceof Error,
       duration,
-    });
+    };
+    emit.receiveRequest(result);
+    this.results.push(result);
 
     // Don't keep results generate more than 1hour ago
     const oneHourAgo = instant - ONE_HOUR;
     const oneHourIndex = Math.max(
-      this.results.findIndex(results => results.instant > oneHourAgo),
+      this.results.findIndex(results => results.at > oneHourAgo),
       0,
     );
     this.results.splice(0, oneHourIndex);
@@ -122,9 +125,7 @@ class Metrics {
       const beforeInstant = instant - lookupDuration;
 
       // We duplicate the results to avoid having a new response that could modify the list
-      const results = this.results.filter(
-        result => result.instant > beforeInstant,
-      );
+      const results = this.results.filter(result => result.at > beforeInstant);
       // Sort by ascending duration
       results.sort((a, b) => a.duration - b.duration);
 
@@ -134,7 +135,7 @@ class Metrics {
         return;
       }
 
-      emit.receiveMetrics({
+      emit.metricsPerformed({
         ...metrics,
         lookupDuration,
         at: instant,

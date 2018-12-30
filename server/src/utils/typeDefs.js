@@ -18,12 +18,20 @@ const typeDefs = gql`
 
   type Subscription {
     monitoringAdded: Monitoring
-    receiveMetrics: Metrics
+    receiveRequest: Request
+    metricsPerformed: Metrics
   }
 
   type Monitoring {
     url: String!
     checkInterval: Int!
+  }
+
+  type Request {
+    at: Timestamp!
+    status: Int!
+    error: Boolean!
+    duration: Int!
   }
 
   type Metrics {

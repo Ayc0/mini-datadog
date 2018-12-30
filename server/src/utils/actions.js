@@ -2,7 +2,8 @@ const { PubSub } = require('apollo-server');
 
 const TYPES = {
   MONITORING_ADDED: 'MONITORING_ADDED',
-  RESULTS_PERFORMED: 'RESULTS_PERFORMED',
+  METRICS_PERFORMED: 'METRICS_PERFORMED',
+  RECEIVE_REQUEST: 'RECEIVE_REQUEST',
 };
 
 const pubsub = new PubSub();
@@ -17,8 +18,10 @@ const subscribe = types => {
 const emit = {
   monitoringAdded: monitoring =>
     pubsub.publish(TYPES.MONITORING_ADDED, { monitoringAdded: monitoring }),
-  receiveMetrics: metrics =>
-    pubsub.publish(TYPES.RESULTS_PERFORMED, { receiveMetrics: metrics }),
+  metricsPerformed: metrics =>
+    pubsub.publish(TYPES.METRICS_PERFORMED, { metricsPerformed: metrics }),
+  receiveRequest: request =>
+    pubsub.publish(TYPES.RECEIVE_REQUEST, { receiveRequest: request }),
 };
 
 module.exports = {
