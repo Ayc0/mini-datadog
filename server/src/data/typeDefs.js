@@ -20,9 +20,9 @@ const typeDefs = gql`
   type Subscription {
     monitoringAdded: Monitoring
     receiveRequest: Request
-    metricsPerformed: Metrics
-    alertGenerated: Alert
-    alertResolved: Alert
+    metricsPerformed(url: String!): Metrics
+    alertGenerated(url: String!): Alert
+    alertResolved(url: String!): Alert
   }
 
   type Monitoring {

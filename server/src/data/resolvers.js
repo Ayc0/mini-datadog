@@ -1,5 +1,7 @@
 /* eslint no-unused-vars: off */
 
+const { withFilter } = require('apollo-server');
+
 const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
 const { getAlerts } = require('../controllers/alerts');
 const { emit, subscribe, types } = require('./actions');
@@ -24,17 +26,26 @@ const resolvers = {
     monitoringAdded: {
       subscribe: () => subscribe([types.MONITORING_ADDED]),
     },
-    metricsPerformed: {
-      subscribe: () => subscribe([types.METRICS_PERFORMED]),
-    },
     receiveRequest: {
       subscribe: () => subscribe([types.RECEIVE_REQUEST]),
     },
+    metricsPerformed: {
+      subscribe: withFilter(
+        () => subscribe([types.METRICS_PERFORMED]),
+        (payload, variables) => payload.metricsPerformed.url === variables.url,
+      ),
+    },
     alertGenerated: {
-      subscribe: () => subscribe([types.ALERT_GENERATED]),
+      subscribe: withFilter(
+        () => subscribe([types.ALERT_GENERATED]),
+        (payload, variables) => payload.alertGenerated.url === variables.url,
+      ),
     },
     alertResolved: {
-      subscribe: () => subscribe([types.ALERT_RESOLVED]),
+      subscribe: withFilter(
+        () => subscribe([types.ALERT_RESOLVED]),
+        (payload, variables) => payload.alertResolved.url === variables.url,
+      ),
     },
   },
 };

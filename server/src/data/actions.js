@@ -20,10 +20,10 @@ const subscribe = types => {
 const emit = {
   monitoringAdded: monitoring =>
     pubsub.publish(TYPES.MONITORING_ADDED, { monitoringAdded: monitoring }),
-  metricsPerformed: metrics =>
-    pubsub.publish(TYPES.METRICS_PERFORMED, { metricsPerformed: metrics }),
   receiveRequest: request =>
     pubsub.publish(TYPES.RECEIVE_REQUEST, { receiveRequest: request }),
+  metricsPerformed: metrics =>
+    pubsub.publish(TYPES.METRICS_PERFORMED, { metricsPerformed: metrics }),
   alertGenerated: alert =>
     pubsub.publish(TYPES.ALERT_GENERATED, {
       alertGenerated: alert,
