@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: off */
 
 const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
-const { emit, subscribe, types } = require('../utils/actions');
+const { emit, subscribe, types } = require('./actions');
 
 const resolvers = {
   Query: {

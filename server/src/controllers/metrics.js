@@ -1,7 +1,7 @@
 const interval = require('@libshin/interval');
 
 const axios = require('../utils/axios');
-const { emit } = require('../utils/actions');
+const { emit } = require('../data/actions');
 
 const { TEN_SEC, ONE_MIN, TEN_MIN, ONE_HOUR } = require('../utils/times');
 

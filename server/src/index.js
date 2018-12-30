@@ -1,9 +1,9 @@
 const { ApolloServer } = require('apollo-server');
 
-const typeDefs = require('./utils/typeDefs');
-const resolvers = require('./utils/resolvers');
+const typeDefs = require('./data/typeDefs');
+const resolvers = require('./data/resolvers');
+const { emit } = require('./data/actions');
 const { verifySchema, verifyEmitters } = require('./utils/verifySchema');
-const { emit } = require('./utils/actions');
 const { isProd } = require('./utils/env');
 
 if (!isProd) {
