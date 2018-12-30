@@ -38,6 +38,8 @@ const typeDefs = gql`
     url: String!
     lookupDuration: Int!
     at: Timestamp!
+    lastStatus: Int!
+    lastWasError: Boolean!
     mostFrequentStatus: Int!
     totalRequests: Int!
     totalDuration: Int!

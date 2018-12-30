@@ -126,21 +126,27 @@ class Metrics {
 
       // We duplicate the results to avoid having a new response that could modify the list
       const results = this.results.filter(result => result.at > beforeInstant);
-      // Sort by ascending duration
-      results.sort((a, b) => a.duration - b.duration);
-
-      const metrics = computeMetrics(results);
-
-      if (metrics === null) {
+      if (results.length === 0) {
         return;
       }
 
-      emit.metricsPerformed({
-        ...metrics,
-        lookupDuration,
-        at: instant,
+      const lastResult = results[results.length - 1];
+
+      // Sort by ascending duration
+      results.sort((a, b) => a.duration - b.duration);
+
+      let metrics = computeMetrics(results);
+
+      metrics = {
         url: this.url,
-      });
+        at: instant,
+        lookupDuration,
+        ...metrics,
+        lastStatus: lastResult.status,
+        lastWasError: lastResult.error,
+      };
+
+      emit.metricsPerformed(metrics);
     };
   }
 }
