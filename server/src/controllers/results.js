@@ -5,6 +5,8 @@ const { emit } = require('../utils/actions');
 
 const { TWO_MIN, TEN_MIN } = require('../utils/times');
 
+const round = number => parseInt(number, 10);
+
 class Results {
   constructor(url, checkInterval) {
     // Bind functions in order to make "this." work consistently
@@ -80,7 +82,7 @@ class Results {
       const beforeInstant = instant - lookupDuration;
       // We duplicate the results to avoid having a new response that could modify the list
       const results = this.results.filter(
-        results => results.instant > lookupDuration,
+        results => results.instant > beforeInstant,
       );
       // Sort by ascending duration
       results.sort((a, b) => a.duration - b.duration);
@@ -114,10 +116,10 @@ class Results {
         totalRequests: results.length,
         totalDuration,
         totalErrors,
-        averageServiceTime: totalDuration / results.length,
-        p50ServiceTime: results[parseInt(results.length * 0.5, 10)].duration,
-        p90ServiceTime: results[parseInt(results.length * 0.9, 10)].duration,
-        p95ServiceTime: results[parseInt(results.length * 0.95, 10)].duration,
+        averageServiceTime: round(totalDuration / results.length),
+        p50ServiceTime: results[round(results.length * 0.5)].duration,
+        p90ServiceTime: results[round(results.length * 0.9)].duration,
+        p95ServiceTime: results[round(results.length * 0.95)].duration,
         maxServiceTime: results[results.length - 1].duration,
       };
       emit.resultsPerformed(data);

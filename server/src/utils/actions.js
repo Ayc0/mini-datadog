@@ -11,7 +11,7 @@ const isValidType = type => type in TYPES;
 
 const subscribe = types => {
   const validTypes = types.filter(isValidType);
-  return pubsub.asyncIterator(types);
+  return pubsub.asyncIterator(validTypes);
 };
 
 const emit = {

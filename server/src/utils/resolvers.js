@@ -18,10 +18,10 @@ const resolvers = {
   },
   Subscription: {
     monitoringAdded: {
-      subscribe: subscribe([types.MONITORING_ADDED]),
+      subscribe: () => subscribe([types.MONITORING_ADDED]),
     },
     resultsPerformed: {
-      subscribe: subscribe([types.RESULTS_PERFORMED]),
+      subscribe: () => subscribe([types.RESULTS_PERFORMED]),
     },
   },
 };
