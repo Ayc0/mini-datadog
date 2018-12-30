@@ -1,0 +1,16 @@
+mutation addMonitoring(
+  $url: String!
+  $minutes: Int
+  $seconds: Int
+  $millis: Int
+) {
+  addMonitoring(
+    url: $url
+    minutes: $minutes
+    seconds: $seconds
+    millis: $millis
+  ) {
+    url
+    checkInterval
+  }
+}

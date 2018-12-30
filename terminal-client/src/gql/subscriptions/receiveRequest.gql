@@ -1,0 +1,8 @@
+subscription receiveRequest {
+  receiveRequest {
+    at
+    status
+    error
+    duration
+  }
+}

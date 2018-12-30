@@ -1,0 +1,6 @@
+subscription alertResolved($url: String!) {
+  alertResolved(url: $url) {
+    at
+    availability
+  }
+}
