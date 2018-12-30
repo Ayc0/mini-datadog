@@ -45,7 +45,7 @@ const computeMetrics = results => {
   };
 };
 
-class Results {
+class Metrics {
   constructor(url, checkInterval) {
     // Bind functions in order to make "this." work consistently
     this.startRequestTimer = this.startRequestTimer.bind(this);
@@ -134,7 +134,7 @@ class Results {
         return;
       }
 
-      emit.resultsPerformed({
+      emit.receiveMetrics({
         ...metrics,
         lookupDuration,
         at: instant,
@@ -144,4 +144,4 @@ class Results {
   }
 }
 
-module.exports = Results;
+module.exports = Metrics;

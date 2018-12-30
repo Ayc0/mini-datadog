@@ -17,8 +17,8 @@ const subscribe = types => {
 const emit = {
   monitoringAdded: monitoring =>
     pubsub.publish(TYPES.MONITORING_ADDED, { monitoringAdded: monitoring }),
-  resultsPerformed: results =>
-    pubsub.publish(TYPES.RESULTS_PERFORMED, { resultsPerformed: results }),
+  receiveMetrics: metrics =>
+    pubsub.publish(TYPES.RESULTS_PERFORMED, { receiveMetrics: metrics }),
 };
 
 module.exports = {

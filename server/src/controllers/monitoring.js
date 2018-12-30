@@ -1,4 +1,4 @@
-const Results = require('./results');
+const Metrics = require('./metrics');
 
 const { ONE_MIN, TEN_MIN } = require('../utils/times');
 
@@ -23,7 +23,7 @@ const addMonitoring = ({ url, minutes = 0, seconds = 0, millis = 0 }) => {
     return monitoring;
   }
   // Create new monitoring
-  const monitoring = new Results(url, checkInterval);
+  const monitoring = new Metrics(url, checkInterval);
   monitorings[url] = monitoring;
   return monitoring;
 };
