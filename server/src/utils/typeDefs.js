@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
+  scalar Timestamp
+
   type Query {
     getMonitorings: [Monitoring]
   }
@@ -27,6 +29,7 @@ const typeDefs = gql`
   type Results {
     url: String!
     lookupDuration: Int!
+    at: Timestamp!
     mostFrequentStatus: Int!
     totalRequests: Int!
     totalDuration: Int!
