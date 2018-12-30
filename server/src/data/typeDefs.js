@@ -20,6 +20,8 @@ const typeDefs = gql`
     monitoringAdded: Monitoring
     receiveRequest: Request
     metricsPerformed: Metrics
+    alertGenerated: Alert
+    alertResolved: Alert
   }
 
   type Monitoring {
@@ -49,6 +51,12 @@ const typeDefs = gql`
     p90ServiceTime: Int!
     p95ServiceTime: Int!
     maxServiceTime: Int!
+  }
+
+  type Alert {
+    at: Timestamp!
+    url: String!
+    availability: Float!
   }
 `;
 

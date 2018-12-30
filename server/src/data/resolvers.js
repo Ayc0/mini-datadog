@@ -26,6 +26,12 @@ const resolvers = {
     receiveRequest: {
       subscribe: () => subscribe([types.RECEIVE_REQUEST]),
     },
+    alertGenerated: {
+      subscribe: () => subscribe([types.ALERT_GENERATED]),
+    },
+    alertResolved: {
+      subscribe: () => subscribe([types.ALERT_RESOLVED]),
+    },
   },
 };
 

@@ -4,6 +4,8 @@ const TYPES = {
   MONITORING_ADDED: 'MONITORING_ADDED',
   METRICS_PERFORMED: 'METRICS_PERFORMED',
   RECEIVE_REQUEST: 'RECEIVE_REQUEST',
+  ALERT_GENERATED: 'ALERT_GENERATED',
+  ALERT_RESOLVED: 'ALERT_RESOLVED',
 };
 
 const pubsub = new PubSub();
@@ -22,6 +24,12 @@ const emit = {
     pubsub.publish(TYPES.METRICS_PERFORMED, { metricsPerformed: metrics }),
   receiveRequest: request =>
     pubsub.publish(TYPES.RECEIVE_REQUEST, { receiveRequest: request }),
+  alertGenerated: alert =>
+    pubsub.publish(TYPES.ALERT_GENERATED, {
+      alertGenerated: alert,
+    }),
+  alertResolved: alert =>
+    pubsub.publish(TYPES.ALERT_RESOLVED, { alertResolved: alert }),
 };
 
 module.exports = {
