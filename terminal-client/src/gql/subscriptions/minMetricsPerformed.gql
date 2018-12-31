@@ -1,0 +1,8 @@
+subscription minMetricsPerformed($url: String!) {
+  metricsPerformed(url: $url) {
+    lookupDuration
+    fast
+    lastStatus
+    averageServiceTime
+  }
+}

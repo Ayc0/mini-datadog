@@ -4,7 +4,7 @@ import { withApollo } from 'react-apollo';
 // eslint-disable-next-line
 import kleur from 'kleur';
 
-import metricsPerformedSub from '../gql/subscriptions/metricsPerformed.gql';
+import subscription from '../gql/subscriptions/minMetricsPerformed.gql';
 import formatTime from '../utils/formatTime';
 import { statusColor } from '../utils/color';
 
@@ -16,7 +16,7 @@ class Monitoring extends React.Component {
 
     this.subscription = props.client
       .subscribe({
-        query: metricsPerformedSub,
+        query: subscription,
         variables: { url: props.url },
       })
       .forEach(({ data: { metricsPerformed } }) => {
@@ -39,8 +39,6 @@ class Monitoring extends React.Component {
         height={4}
         border={{ type: 'line' }}
         style={{ border: { fg: 'blue' } }}
-        clickable
-        onClick={console.log}
       >
         <text top={0}>{`${url}    ${formatTime(checkInterval)} ↩️`}</text>
         {fastMetrics && (
