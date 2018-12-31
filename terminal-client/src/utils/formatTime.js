@@ -1,5 +1,4 @@
-const round = number => parseInt(number, 10);
-const cut = number => round(number * 100) / 100;
+import { round, cut } from './math';
 
 const formatTime = timestamp => {
   // millis

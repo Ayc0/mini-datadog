@@ -1,8 +1,12 @@
 import React from 'react';
 import { withApollo } from 'react-apollo';
 
+// eslint-disable-next-line
+import kleur from 'kleur';
+
 import metricsPerformedSub from '../gql/subscriptions/metricsPerformed.gql';
 import formatTime from '../utils/formatTime';
+import { statusColor } from '../utils/color';
 
 class Monitoring extends React.Component {
   constructor(props) {
@@ -41,7 +45,9 @@ class Monitoring extends React.Component {
         <text top={0}>{`${url}    ${formatTime(checkInterval)} ↩️`}</text>
         {fastMetrics && (
           <text right={3} top={0}>
-            {fastMetrics.lastStatus === 0 ? 'Error' : fastMetrics.lastStatus}
+            {kleur[statusColor(fastMetrics.lastStatus)](
+              fastMetrics.lastStatus === 0 ? 'Error' : fastMetrics.lastStatus,
+            )}
           </text>
         )}
 

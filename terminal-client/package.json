@@ -26,6 +26,7 @@
     "eslint-config-linkcs-react": "^0.1.5",
     "eslint-config-prettier": "^3.3.0",
     "graphql-tag": "^2.10.0",
+    "kleur": "^3.0.1",
     "ws": "^6.1.2"
   }
 }
