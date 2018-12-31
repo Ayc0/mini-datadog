@@ -6,7 +6,17 @@ const { handleAlerts } = require('./alerts');
 
 const { TEN_SEC, ONE_MIN, TEN_MIN, ONE_HOUR } = require('../utils/times');
 
+const metricsCache = {};
+
 const round = number => parseInt(number, 10);
+
+const saveMetrics = metrics => {
+  if (!(metrics.url in metricsCache)) {
+    metricsCache[metrics.url] = { fast: null, slow: null };
+  }
+  metricsCache[metrics.url][metrics.fast ? 'fast' : 'slow'] = metrics;
+  handleAlerts(metrics);
+};
 
 const computeMetrics = results => {
   if (results.length === 0) {
@@ -148,11 +158,13 @@ class Metrics {
         lastStatus: lastResult.status,
         lastWasError: lastResult.error,
       };
-      handleAlerts(metrics);
+      saveMetrics(metrics);
 
       emit.metricsPerformed(metrics);
     };
   }
 }
 
-module.exports = Metrics;
+const getMetrics = url => metricsCache[url] || null;
+
+module.exports = { Metrics, getMetrics };

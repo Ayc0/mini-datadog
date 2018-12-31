@@ -4,6 +4,7 @@ const { withFilter } = require('apollo-server');
 
 const { getMonitorings, addMonitoring } = require('../controllers/monitoring');
 const { getAlerts } = require('../controllers/alerts');
+const { getMetrics } = require('../controllers/metrics');
 const { emit, subscribe, types } = require('./actions');
 
 const resolvers = {
@@ -13,6 +14,9 @@ const resolvers = {
     },
     getAlerts(root, args, context) {
       return getAlerts();
+    },
+    getLastMetrics(root, args, context) {
+      return getMetrics(args.url);
     },
   },
   Mutation: {

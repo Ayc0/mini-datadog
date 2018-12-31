@@ -1,4 +1,4 @@
-const Metrics = require('./metrics');
+const { Metrics } = require('./metrics');
 
 const { ONE_MIN, TEN_MIN } = require('../utils/times');
 

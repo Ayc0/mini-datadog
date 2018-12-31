@@ -6,6 +6,7 @@ const typeDefs = gql`
   type Query {
     getMonitorings: [Monitoring]
     getAlerts: [Alert]
+    getLastMetrics(url: String!): LastMetrics
   }
 
   type Mutation {
@@ -52,6 +53,11 @@ const typeDefs = gql`
     p90ServiceTime: Int!
     p95ServiceTime: Int!
     maxServiceTime: Int!
+  }
+
+  type LastMetrics {
+    fast: Metrics
+    slow: Metrics
   }
 
   type Alert {
