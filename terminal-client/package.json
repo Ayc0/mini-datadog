@@ -13,6 +13,7 @@
     "apollo-utilities": "^1.0.27",
     "blessed": "^0.1.81",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
+    "kleur": "^3.0.1",
     "node-fetch": "^2.3.0",
     "parcel-bundler": "^1.11.0",
     "react": "^16.7.0",
@@ -26,7 +27,6 @@
     "eslint-config-linkcs-react": "^0.1.5",
     "eslint-config-prettier": "^3.3.0",
     "graphql-tag": "^2.10.0",
-    "kleur": "^3.0.1",
     "ws": "^6.1.2"
   }
 }

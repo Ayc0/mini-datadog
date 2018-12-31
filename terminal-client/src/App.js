@@ -5,6 +5,7 @@ import client from './client';
 
 import AddMonitorButton from './AddMonitorButton';
 import Monitorings from './Monitorings';
+import Alerts from './Alerts';
 import Button from './Button';
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
           <element>center</element>
         </box>
         <box
+          label="Alerts log"
           top="center"
           left="80%"
           width="20%"
@@ -48,7 +50,7 @@ class App extends Component {
           border={{ type: 'line' }}
           style={{ border: { fg: 'blue' } }}
         >
-          <box>Second box.</box>
+          <Alerts />
         </box>
         {this.state.showPrompt && (
           <AddMonitorButton

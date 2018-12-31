@@ -4,6 +4,7 @@
     "prefer-destructuring": "off",
     "no-param-reassign": "off",
     "jsx-a11y/accessible-emoji": "off",
-    "react/button-has-type": "off"
+    "react/button-has-type": "off",
+    "react/jsx-one-expression-per-line": "off"
   }
 }
