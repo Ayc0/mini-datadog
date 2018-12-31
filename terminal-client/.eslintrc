@@ -2,6 +2,7 @@
   "extends": ["linkcs-react", "prettier"],
   "rules": {
     "prefer-destructuring": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "jsx-a11y/accessible-emoji": "off"
   }
 }

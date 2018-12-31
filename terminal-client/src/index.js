@@ -6,6 +6,7 @@ import App from './App';
 
 // Creating our screen
 const screen = blessed.screen({
+  fullUnicode: true,
   autoPadding: true,
   smartCSR: true,
   title: 'react-blessed hello world',
