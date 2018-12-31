@@ -5,7 +5,6 @@ const TYPES = {
   METRICS_PERFORMED: 'METRICS_PERFORMED',
   RECEIVE_REQUEST: 'RECEIVE_REQUEST',
   ALERT_GENERATED: 'ALERT_GENERATED',
-  ALERT_RESOLVED: 'ALERT_RESOLVED',
 };
 
 const pubsub = new PubSub();
@@ -28,8 +27,6 @@ const emit = {
     pubsub.publish(TYPES.ALERT_GENERATED, {
       alertGenerated: alert,
     }),
-  alertResolved: alert =>
-    pubsub.publish(TYPES.ALERT_RESOLVED, { alertResolved: alert }),
 };
 
 module.exports = {

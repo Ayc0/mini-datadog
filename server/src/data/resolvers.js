@@ -32,19 +32,17 @@ const resolvers = {
     metricsPerformed: {
       subscribe: withFilter(
         () => subscribe([types.METRICS_PERFORMED]),
-        (payload, variables) => payload.metricsPerformed.url === variables.url,
+        (payload, variables) =>
+          variables.url === undefined ||
+          payload.metricsPerformed.url === variables.url,
       ),
     },
     alertGenerated: {
       subscribe: withFilter(
         () => subscribe([types.ALERT_GENERATED]),
-        (payload, variables) => payload.alertGenerated.url === variables.url,
-      ),
-    },
-    alertResolved: {
-      subscribe: withFilter(
-        () => subscribe([types.ALERT_RESOLVED]),
-        (payload, variables) => payload.alertResolved.url === variables.url,
+        (payload, variables) =>
+          variables.url === undefined ||
+          payload.alertGenerated.url === variables.url,
       ),
     },
   },

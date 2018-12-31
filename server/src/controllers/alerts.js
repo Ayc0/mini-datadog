@@ -30,6 +30,7 @@ const registerAlert = url => {
         at: Date.now(),
         url,
         availability: alert.availability,
+        resolved: false,
       };
       alert.isSent = true;
       alert.errorTimeoutID = null;
@@ -54,9 +55,10 @@ const resolveAlert = url => {
         at: Date.now(),
         url,
         availability: alert.availability,
+        resolved: true,
       };
       console.log('RESOLVE', resolutionToSend);
-      emit.alertResolved(resolutionToSend);
+      emit.alertGenerated(resolutionToSend);
       alert.isSent = false;
       alert.resolutionTimeoutID = null;
 

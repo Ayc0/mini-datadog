@@ -1,4 +1,4 @@
-subscription metricsPerformed($url: String!) {
+subscription metricsPerformed($url: String) {
   metricsPerformed(url: $url) {
     lookupDuration
     fast

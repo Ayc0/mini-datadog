@@ -20,9 +20,8 @@ const typeDefs = gql`
   type Subscription {
     monitoringAdded: Monitoring
     receiveRequest: Request
-    metricsPerformed(url: String!): Metrics
-    alertGenerated(url: String!): Alert
-    alertResolved(url: String!): Alert
+    metricsPerformed(url: String): Metrics
+    alertGenerated(url: String): Alert
   }
 
   type Monitoring {
@@ -56,6 +55,7 @@ const typeDefs = gql`
   }
 
   type Alert {
+    resolved: Boolean!
     at: Timestamp!
     url: String!
     availability: Float!
