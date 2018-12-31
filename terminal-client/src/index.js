@@ -19,3 +19,5 @@ screen.enableInput();
 
 // Rendering the React app using our screen
 render(<App />, screen);
+
+export default screen;

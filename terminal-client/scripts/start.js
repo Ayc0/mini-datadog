@@ -12,7 +12,7 @@ const entryFiles = path.join(__dirname, '../src/index.js');
 // Bundler options
 const options = {
   outFile: 'index.js', // The name of the outputFile
-  watch: false, // Whether to watch the files and rebuild them on change, defaults to process.env.NODE_ENV !== 'production'
+  watch: true, // Whether to watch the files and rebuild them on change, defaults to process.env.NODE_ENV !== 'production'
   cache: true, // Enabled or disables caching, defaults to true
   scopeHoist: false, // Turn on experimental scope hoisting/tree shaking flag, for smaller production bundles
   logLevel: 0,
@@ -24,9 +24,19 @@ const options = {
 // Initializes a bundler using the entrypoint location and options provided
 const bundler = new Bundler(entryFiles, options);
 
+let screen;
+
+bundler.on('buildStart', () => {
+  if (screen) {
+    screen.destroy();
+    screen = undefined;
+  }
+});
+
 bundler.on('bundled', bundle => {
   // eslint-disable-next-line
-  require(bundle.name);
+  screen = require(bundle.name).default;
+  delete require.cache[require.resolve(bundle.name)];
 });
 
 bundler.bundle();
