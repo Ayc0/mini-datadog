@@ -4,7 +4,7 @@ import { HttpLink } from 'apollo-link-http';
 import { WebSocketLink } from 'apollo-link-ws';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { getMainDefinition } from 'apollo-utilities';
-import fetch from 'unfetch';
+import fetch from 'node-fetch';
 
 // Create an http link:
 const httpLink = new HttpLink({

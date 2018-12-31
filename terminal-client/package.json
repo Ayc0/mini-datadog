@@ -13,12 +13,12 @@
     "apollo-utilities": "^1.0.27",
     "blessed": "^0.1.81",
     "graphql": "^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0",
+    "node-fetch": "^2.3.0",
     "parcel-bundler": "^1.11.0",
     "react": "^16.7.0",
     "react-apollo": "^2.3.3",
     "react-blessed": "^0.5.0",
-    "subscriptions-transport-ws": "^0.9.15",
-    "unfetch": "^4.0.1"
+    "subscriptions-transport-ws": "^0.9.15"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
