@@ -13,7 +13,7 @@ const screen = blessed.screen({
 });
 
 // Adding a way to quit the program
-screen.key(['escape', 'C-c'], () => process.exit(0));
+screen.key(['C-c'], () => process.exit(0));
 
 // Enable key and mouse events
 screen.enableInput();
