@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withApollo } from 'react-apollo';
+import { Query, withApollo } from 'react-apollo';
 
 import Alert from './Alert';
 
@@ -10,38 +10,33 @@ class AlertsWithGQL extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { alerts: [] };
-
-    props.client
-      .query({
-        query: getAlerts,
-      })
-      .then(({ data }) => {
-        if (data && data.getAlerts) {
-          this.setState({
-            alerts: data.getAlerts,
-          });
-        }
-      });
-
     props.client
       .subscribe({
         query: alertGenerated,
       })
       .forEach(({ data }) => {
         if (data && data.alertGenerated) {
-          this.setState(({ alerts }) => ({
-            alerts: [...alerts, data.alertGenerated],
-          }));
+          // Update cache and dispatch change to modify every components that use the getAlerts query
+          const query = props.client.readQuery({ query: getAlerts });
+          query.getAlerts.push(data.alertGenerated);
+          props.client.writeQuery({ query: getAlerts, data: query });
         }
       });
   }
 
   render() {
-    console.log(this.state.alerts);
-    return this.state.alerts.map((alert, index) => (
-      <Alert offset={index} key={alert.at} alert={alert} />
-    ));
+    return (
+      <Query query={getAlerts}>
+        {({ data }) => {
+          if (!data || !data.getAlerts) {
+            return null;
+          }
+          return data.getAlerts.map((alert, index) => (
+            <Alert offset={index} key={alert.at} alert={alert} />
+          ));
+        }}
+      </Query>
+    );
   }
 }
 
