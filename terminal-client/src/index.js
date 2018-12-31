@@ -17,7 +17,23 @@ screen.key(['escape', 'C-c'], () => process.exit(0));
 // Enable key and mouse events
 screen.enableInput();
 
-// Rendering the React app using our screen
-render(<App />, screen);
+let self;
 
-export default screen;
+// Rendering the React app using our screen
+class Wrapper extends React.Component {
+  constructor(props) {
+    super(props);
+    self = this;
+    this.state = { show: true };
+  }
+
+  render() {
+    return this.state.show && <App />;
+  }
+}
+render(<Wrapper />, screen);
+
+export default () => {
+  self.setState({ show: false });
+  setTimeout(() => screen.destroy(), 10);
+};

@@ -24,18 +24,18 @@ const options = {
 // Initializes a bundler using the entrypoint location and options provided
 const bundler = new Bundler(entryFiles, options);
 
-let screen;
+let unmount;
 
 bundler.on('buildStart', () => {
-  if (screen) {
-    screen.destroy();
-    screen = undefined;
+  if (unmount) {
+    unmount();
+    unmount = undefined;
   }
 });
 
 bundler.on('bundled', bundle => {
   // eslint-disable-next-line
-  screen = require(bundle.name).default;
+  unmount = require(bundle.name).default;
   delete require.cache[require.resolve(bundle.name)];
 });
 
