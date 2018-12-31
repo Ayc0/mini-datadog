@@ -1,7 +1,5 @@
 import React from 'react';
 import { withApollo } from 'react-apollo';
-
-// eslint-disable-next-line
 import kleur from 'kleur';
 
 import subscription from '../gql/subscriptions/minMetricsPerformed.gql';
@@ -14,7 +12,7 @@ class Monitoring extends React.Component {
 
     this.state = { fastMetrics: null, slowMetrics: null };
 
-    this.subscription = props.client
+    props.client
       .subscribe({
         query: subscription,
         variables: { url: props.url },
@@ -40,9 +38,9 @@ class Monitoring extends React.Component {
         border={{ type: 'line' }}
         style={{ border: { fg: 'blue' } }}
       >
-        <text top={0}>{`${url}    ${formatTime(checkInterval)} ↩️`}</text>
+        <text top={0}>{`${url}  ${formatTime(checkInterval)} ↩️`}</text>
         {fastMetrics && (
-          <text right={3} top={0}>
+          <text right={1} top={0}>
             {kleur[statusColor(fastMetrics.lastStatus)](
               fastMetrics.lastStatus === 0 ? 'Error' : fastMetrics.lastStatus,
             )}
