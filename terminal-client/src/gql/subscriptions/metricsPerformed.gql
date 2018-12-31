@@ -1,6 +1,7 @@
 subscription metricsPerformed($url: String!) {
   metricsPerformed(url: $url) {
     lookupDuration
+    fast
     lastStatus
     lastWasError
     mostFrequentStatus

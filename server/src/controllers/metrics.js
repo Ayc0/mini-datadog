@@ -143,6 +143,7 @@ class Metrics {
         url: this.url,
         at: instant,
         lookupDuration,
+        fast,
         ...metrics,
         lastStatus: lastResult.status,
         lastWasError: lastResult.error,

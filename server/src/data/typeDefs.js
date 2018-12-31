@@ -39,6 +39,7 @@ const typeDefs = gql`
 
   type Metrics {
     url: String!
+    fast: Boolean!
     lookupDuration: Int!
     at: Timestamp!
     lastStatus: Int!
