@@ -51,13 +51,13 @@ class Monitoring extends React.Component {
           </text>
         )}
 
-        <text left={2} bottom={0}>
+        <text left={4} bottom={0}>
           {fastMetrics
             ? `🐇 ${formatTime(fastMetrics.averageServiceTime)}`
             : '🕑'}
         </text>
 
-        <text right={2} bottom={0}>
+        <text left={14} bottom={0}>
           {slowMetrics
             ? `🐌 ${formatTime(slowMetrics.averageServiceTime)}`
             : '🕑'}
