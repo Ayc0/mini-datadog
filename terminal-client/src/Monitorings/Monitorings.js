@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import Monitoring from '../Monitoring';
 
@@ -10,4 +10,4 @@ const Monitorings = ({ monitorings }) => (
   </React.Fragment>
 );
 
-export default Monitorings;
+export default memo(Monitorings);
