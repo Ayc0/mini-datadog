@@ -2,6 +2,7 @@ import React from 'react';
 import { withApollo } from 'react-apollo';
 
 import metricsPerformedSub from '../gql/subscriptions/metricsPerformed.gql';
+import formatTime from '../utils/formatTime';
 
 class Monitoring extends React.Component {
   constructor(props) {
@@ -30,29 +31,31 @@ class Monitoring extends React.Component {
       <element
         width="100%"
         left="center"
-        top={offset * 3}
+        top={offset * 3 + 4}
         height={4}
         border={{ type: 'line' }}
         style={{ border: { fg: 'blue' } }}
         clickable
         onClick={console.log}
       >
-        <text top={0}>{`${url} - ↩️ ${checkInterval}`}</text>
+        <text top={0}>{`${url}    ${formatTime(checkInterval)} ↩️`}</text>
         {fastMetrics && (
-          <text right={1} top={0}>
-            {fastMetrics.status}
+          <text right={3} top={0}>
+            {fastMetrics.lastStatus === 0 ? 'Error' : fastMetrics.lastStatus}
           </text>
         )}
-        {fastMetrics && (
-          <text left={2} bottom={0}>
-            {`🐇 ${fastMetrics.averageServiceTime}`}
-          </text>
-        )}
-        {slowMetrics && (
-          <text right={2} bottom={0}>
-            {`🐌 ${slowMetrics.averageServiceTime}`}
-          </text>
-        )}
+
+        <text left={2} bottom={0}>
+          {fastMetrics
+            ? `🐇 ${formatTime(fastMetrics.averageServiceTime)}`
+            : '🕑'}
+        </text>
+
+        <text right={2} bottom={0}>
+          {slowMetrics
+            ? `🐌 ${formatTime(slowMetrics.averageServiceTime)}`
+            : '🕑'}
+        </text>
       </element>
     );
   }
