@@ -42,11 +42,11 @@ class AddMonitorButton extends Component {
         top="center"
         left="center"
         width={50}
-        height={20}
+        height={10}
         border={{ type: 'line' }}
         style={{ border: { fg: 'blue' } }}
       >
-        <form top={4}>
+        <form top={1} left={2}>
           <box>URL:</box>
           <textbox
             left={5}
@@ -58,10 +58,10 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('url')}
           />
         </form>
-        <form top={6}>
+        <form top={3} left={2}>
           <box>minutes:</box>
           <NumberInput
-            left={8}
+            left={9}
             mouse
             inputOnFocus
             clickable={!this.state.focused}
@@ -70,10 +70,10 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('minutes')}
           />
         </form>
-        <form top={7}>
+        <form top={4} left={2}>
           <box>seconds:</box>
           <NumberInput
-            left={8}
+            left={9}
             mouse
             inputOnFocus
             clickable={!this.state.focused}
@@ -82,10 +82,10 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('seconds')}
           />
         </form>
-        <form top={8}>
+        <form top={5} left={2}>
           <box>millis:</box>
           <NumberInput
-            left={7}
+            left={8}
             mouse
             inputOnFocus
             clickable={!this.state.focused}
