@@ -10,6 +10,7 @@ const Monitoring = ({
   checkInterval,
   fastMetrics,
   slowMetrics,
+  onClick,
 }) => (
   <element
     width="100%"
@@ -18,6 +19,8 @@ const Monitoring = ({
     height={4}
     border={{ type: 'line' }}
     style={{ border: { fg: 'blue' } }}
+    onClick={() => onClick(url)}
+    clickable
   >
     <text top={0}>{`${url}  ${formatTime(checkInterval)} ↩️`}</text>
     {fastMetrics && (

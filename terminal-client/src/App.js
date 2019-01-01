@@ -12,10 +12,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { showPrompt: false };
+    this.state = { showPrompt: false, selectedMonitoringUrl: null };
   }
 
   render() {
+    console.log(this.state.selectedMonitoringUrl);
     return (
       <ApolloProvider client={client}>
         <box top="center" left={0} width="30%" height="100%">
@@ -29,7 +30,9 @@ class App extends Component {
           >
             Monitor a new site
           </Button>
-          <Monitorings />
+          <Monitorings
+            onClick={url => this.setState({ selectedMonitoringUrl: url })}
+          />
         </box>
         <box
           top="center"
