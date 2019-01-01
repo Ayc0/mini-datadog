@@ -10,6 +10,7 @@ query getLastMetrics($url: String!) {
       totalDuration
       totalErrors
       averageServiceTime
+      standardDeviationServiceTime
       p50ServiceTime
       p90ServiceTime
       p95ServiceTime
@@ -25,6 +26,7 @@ query getLastMetrics($url: String!) {
       totalDuration
       totalErrors
       averageServiceTime
+      standardDeviationServiceTime
       p50ServiceTime
       p90ServiceTime
       p95ServiceTime

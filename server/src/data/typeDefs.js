@@ -49,6 +49,7 @@ const typeDefs = gql`
     totalDuration: Int!
     totalErrors: Int!
     averageServiceTime: Int!
+    standardDeviationServiceTime: Int!
     p50ServiceTime: Int!
     p90ServiceTime: Int!
     p95ServiceTime: Int!

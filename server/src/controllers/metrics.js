@@ -22,8 +22,13 @@ const computeMetrics = results => {
   if (results.length === 0) {
     return null;
   }
-  const [totalDuration, totalErrors, differentStatuses] = results.reduce(
-    ([total, errors, statuses], { duration, status, error }) => {
+  const [
+    totalDuration,
+    totalOfSquared,
+    totalErrors,
+    differentStatuses,
+  ] = results.reduce(
+    ([total, sumOfSquared, errors, statuses], { duration, status, error }) => {
       let isError = 0;
       if (error) {
         isError = 1;
@@ -32,9 +37,14 @@ const computeMetrics = results => {
       } else {
         statuses[status] = 1;
       }
-      return [total + duration, errors + isError, statuses];
+      return [
+        total + duration,
+        sumOfSquared + duration ** 2,
+        errors + isError,
+        statuses,
+      ];
     },
-    [0, 0, {}],
+    [0, 0, 0, {}],
   );
   const maxStatus = Math.max(...Object.values(differentStatuses));
   const mostFrequentStatus =
@@ -44,12 +54,17 @@ const computeMetrics = results => {
       ),
       10,
     ) || 0;
+  const averageServiceTime = totalDuration / results.length;
+  const standardDeviationServiceTime = Math.sqrt(
+    totalOfSquared / results.length - averageServiceTime ** 2,
+  );
   return {
     mostFrequentStatus,
     totalRequests: results.length,
     totalDuration,
     totalErrors,
-    averageServiceTime: round(totalDuration / results.length),
+    averageServiceTime: round(averageServiceTime),
+    standardDeviationServiceTime: round(standardDeviationServiceTime),
     p50ServiceTime: results[round(results.length * 0.5)].duration,
     p90ServiceTime: results[round(results.length * 0.9)].duration,
     p95ServiceTime: results[round(results.length * 0.95)].duration,
