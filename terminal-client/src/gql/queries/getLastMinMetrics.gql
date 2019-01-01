@@ -1,0 +1,16 @@
+query getLastMinMetrics($url: String!) {
+  getLastMetrics(url: $url) {
+    fast {
+      lookupDuration
+      fast
+      lastStatus
+      averageServiceTime
+    }
+    slow {
+      lookupDuration
+      fast
+      lastStatus
+      averageServiceTime
+    }
+  }
+}
