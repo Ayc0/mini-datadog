@@ -1,13 +1,10 @@
-import React, { memo } from 'react';
+import React from 'react';
 
 import Monitoring from '../Monitoring';
 
-const Monitorings = ({ monitorings }) => (
-  <React.Fragment>
-    {monitorings.map(({ url, checkInterval }, index) => (
-      <Monitoring key={url} offset={index} {...{ url, checkInterval }} />
-    ))}
-  </React.Fragment>
-);
+const Monitorings = ({ monitorings }) =>
+  monitorings.map(({ url, checkInterval }, index) => (
+    <Monitoring key={url} offset={index} {...{ url, checkInterval }} />
+  ));
 
-export default memo(Monitorings);
+export default Monitorings;

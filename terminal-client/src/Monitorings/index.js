@@ -4,7 +4,6 @@ import { Query } from 'react-apollo';
 import Monitorings from './Monitorings';
 
 import getMonitorings from '../gql/queries/getMonitorings.gql';
-// import addMonitoring from '../gql/mutations/addMonitoring.gql';
 
 export default props => (
   <Query query={getMonitorings}>
