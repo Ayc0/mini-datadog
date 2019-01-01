@@ -22,6 +22,13 @@ class MonitoringWithGQL extends Component {
           // Update cache and dispatch change to modify every components that use the getAlerts query
           const query = { query: getLastMinMetrics, variables: { url } };
           const cachedQuery = client.readQuery(query);
+          if (cachedQuery.getLastMetrics === null) {
+            cachedQuery.getLastMetrics = {
+              __typename: 'LastMetrics',
+              fast: null,
+              slow: null,
+            };
+          }
           cachedQuery.getLastMetrics[
             data.metricsPerformed.fast ? 'fast' : 'slow'
           ] = data.metricsPerformed;
@@ -39,7 +46,14 @@ class MonitoringWithGQL extends Component {
       <Query query={getLastMinMetrics} variables={{ url }}>
         {({ data }) => {
           if (!data || !data.getLastMetrics) {
-            return null;
+            return (
+              <Monitoring
+                {...props}
+                url={url}
+                slowMetrics={null}
+                fastMetrics={null}
+              />
+            );
           }
           return (
             <Monitoring
