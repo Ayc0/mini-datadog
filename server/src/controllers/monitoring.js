@@ -4,6 +4,9 @@ const { ONE_MIN, TEN_MIN } = require('../utils/times');
 
 const monitorings = {};
 
+const trim = string =>
+  string.replace(/^[\s\uFEFF\xA0/]+|[\s\uFEFF\xA0/]+$/g, '');
+
 const addMonitoring = ({ url, minutes = 0, seconds = 0, millis = 0 }) => {
   let checkInterval = (minutes * 60 + seconds) * 1000 + millis;
   if (checkInterval <= 0) {
@@ -14,6 +17,13 @@ const addMonitoring = ({ url, minutes = 0, seconds = 0, millis = 0 }) => {
   if (checkInterval > TEN_MIN) {
     checkInterval = TEN_MIN;
   }
+
+  url = trim(url);
+
+  if (!url.match(/^https?:\/\//)) {
+    url = `http://${url}`;
+  }
+
   // Update checkInterval value
   if (url in monitorings) {
     const monitoring = monitorings[url];
