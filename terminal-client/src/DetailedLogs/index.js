@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Query, withApollo } from 'react-apollo';
 
-import Monitoring from './Monitoring';
+import DetailedLogs from './DetailedLogs';
 
-import getLastMinMetrics from '../gql/queries/getLastMinMetrics.gql';
-import minMetricsPerformed from '../gql/subscriptions/minMetricsPerformed.gql';
+import getLastMetrics from '../gql/queries/getLastMetrics.gql';
+import metricsPerformed from '../gql/subscriptions/metricsPerformed.gql';
 
-class MonitoringWithGQL extends Component {
+class DetailedLogsWithGQL extends Component {
   constructor(props) {
     super(props);
 
@@ -14,12 +14,12 @@ class MonitoringWithGQL extends Component {
 
     client
       .subscribe({
-        query: minMetricsPerformed,
+        query: metricsPerformed,
         variables: { url },
       })
       .forEach(() => {
         client.query({
-          query: getLastMinMetrics,
+          query: getLastMetrics,
           variables: { url },
         });
       });
@@ -27,12 +27,13 @@ class MonitoringWithGQL extends Component {
 
   render() {
     const { client, url, ...props } = this.props;
+
     return (
-      <Query query={getLastMinMetrics} variables={{ url }}>
+      <Query query={getLastMetrics} variables={{ url }}>
         {({ data }) => {
           if (!data || !data.getLastMetrics) {
             return (
-              <Monitoring
+              <DetailedLogs
                 {...props}
                 url={url}
                 slowMetrics={null}
@@ -41,7 +42,7 @@ class MonitoringWithGQL extends Component {
             );
           }
           return (
-            <Monitoring
+            <DetailedLogs
               {...props}
               url={url}
               slowMetrics={data.getLastMetrics.slow}
@@ -54,4 +55,4 @@ class MonitoringWithGQL extends Component {
   }
 }
 
-export default withApollo(MonitoringWithGQL);
+export default withApollo(DetailedLogsWithGQL);
