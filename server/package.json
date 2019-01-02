@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "nodemon src/index.js",
-    "start:prod": "node src/index.js"
+    "start:prod": "NODE_ENV=production node src/index.js"
   },
   "dependencies": {
     "@libshin/interval": "^1.0.4",

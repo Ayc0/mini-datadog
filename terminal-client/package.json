@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "node scripts/start.js",
+    "start:prod": "npm run -s build && NODE_ENV=production node dist/index.js",
     "debug": "NODE_ENV=debug node --inspect=9229 scripts/start.js",
     "build": "parcel build src/index.js --target node"
   },
