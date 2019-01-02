@@ -103,3 +103,9 @@ Then you'll see 2 columns: the one on the left contains metrics computed during 
 When the availability of a website if bellow 80% (and stays bellow 80% for at least 2min), an alert will be sent and it will only be resolved if the availability is over 80% for at least 2min.
 
 ![Alerts](./images/alerts.png)
+
+# UI improvements
+
+Currently, columns aren't scrollable, so if you want to monitor many websites, you won't be able to see all of those.
+
+That's the same for the alerts. And as I haven't figure out a way to scroll within a column but I wanted to be able to see the most recent alerts, alerts are displayed from the most recent to the oldest.
