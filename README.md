@@ -89,3 +89,11 @@ Once you've added this site, you should see this:
 ![popup add monitoring](./images/default-layout.png)
 
 On the left, there are every site you're monitoring, in the middle, the details on the last metrics computed for this website, and on the right there are the alerts.
+
+## Detailed metrics
+
+To visualize the detailed metrics, you just have to click on website in the left panel.
+
+![Detailed metrics](./images/detailed-metrics.png)
+
+Then you'll see 2 columns: the one on the left contains metrics computed during the last 10 minutes, and the one on the right during the past hour.
