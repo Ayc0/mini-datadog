@@ -7,6 +7,7 @@ import AddMonitorButton from './AddMonitorButton';
 import Monitorings from './Monitorings';
 import Alerts from './Alerts';
 import Button from './Button';
+import DetailedLogs from './DetailedLogs';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.selectedMonitoringUrl);
+    const { selectedMonitoringUrl } = this.state;
     return (
       <ApolloProvider client={client}>
         <box top="center" left={0} width="30%" height="100%">
@@ -42,7 +43,9 @@ class App extends Component {
           border={{ type: 'line' }}
           style={{ border: { fg: 'blue' } }}
         >
-          <element>center</element>
+          {selectedMonitoringUrl && (
+            <DetailedLogs url={selectedMonitoringUrl} />
+          )}
         </box>
         <box
           label="Alerts log"
