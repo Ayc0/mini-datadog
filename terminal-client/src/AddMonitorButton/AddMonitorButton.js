@@ -42,7 +42,7 @@ class AddMonitorButton extends Component {
         top="center"
         left="center"
         width={50}
-        height={10}
+        height={13}
         border={{ type: 'line' }}
         style={{ border: { fg: 'blue' } }}
       >
@@ -58,7 +58,10 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('url')}
           />
         </form>
-        <form top={3} left={2}>
+        <text top={3} left={2}>
+          Interval between two requests
+        </text>
+        <form top={4} left={4}>
           <box>minutes:</box>
           <NumberInput
             left={9}
@@ -70,7 +73,7 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('minutes')}
           />
         </form>
-        <form top={4} left={2}>
+        <form top={5} left={4}>
           <box>seconds:</box>
           <NumberInput
             left={9}
@@ -82,7 +85,7 @@ class AddMonitorButton extends Component {
             onSubmit={this.onInput('seconds')}
           />
         </form>
-        <form top={5} left={2}>
+        <form top={6} left={4}>
           <box>millis:</box>
           <NumberInput
             left={8}
@@ -98,7 +101,7 @@ class AddMonitorButton extends Component {
           width={8}
           height={3}
           bottom={0}
-          right={4}
+          right={8}
           padding={1}
           onClick={() => this.onValidate()}
         >
@@ -108,7 +111,7 @@ class AddMonitorButton extends Component {
           width={10}
           height={3}
           bottom={0}
-          right={12}
+          right={16}
           padding={1}
           onClick={onCancel}
         >
