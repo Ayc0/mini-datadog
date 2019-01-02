@@ -2,13 +2,28 @@ import React, { Fragment } from 'react';
 import kleur from 'kleur';
 
 import formatTime from '../utils/formatTime';
-import { round } from '../utils/math';
+import { round, cut } from '../utils/math';
 import { statusColor } from '../utils/color';
 
 const displayStatus = (isError, status) =>
   kleur[statusColor(status)](isError ? 'Error' : status);
 
 const plural = (number, word) => `${number} ${word}${number > 1 ? 's' : ''}`;
+
+const displayAvailability = (requests, errors) => {
+  const availability = cut((1 - errors / requests) * 100, 1);
+  const text = `${availability}%`;
+  if (availability >= 95) {
+    return kleur.green(text);
+  }
+  if (availability >= 90) {
+    return kleur.blue(text);
+  }
+  if (availability >= 80) {
+    return kleur.yellow(text);
+  }
+  return kleur.red(text);
+};
 
 const DetailedMetrics = ({ metrics }) => {
   if (!metrics) {
@@ -58,6 +73,7 @@ const DetailedMetrics = ({ metrics }) => {
     '',
     plural(totalRequests, 'request'),
     plural(totalErrors, 'error'),
+    `${displayAvailability(totalRequests, totalErrors)} of availability`,
     `${formatTime(totalDuration)} of requesting`,
     '',
     `Average service time: ${formatTime(averageServiceTime)} ${tolerance}`,
@@ -72,7 +88,8 @@ const DetailedMetrics = ({ metrics }) => {
         {title}
       </text>
       {metricsToDisplay.map((text, index) => (
-        <text top={3 + index} left={2}>
+        // eslint-disable-next-line
+        <text top={3 + index} left={2} key={index}>
           {text}
         </text>
       ))}
@@ -81,10 +98,10 @@ const DetailedMetrics = ({ metrics }) => {
 };
 
 export default ({ url, slowMetrics, fastMetrics }) => {
-  const title = `Detailed metrics for ${url}`;
+  const title = kleur.bold(`Detailed metrics for ${url}`);
   return (
     <Fragment>
-      <text left="center" top={2}>
+      <text left="center" top={1}>
         {title}
       </text>
 
