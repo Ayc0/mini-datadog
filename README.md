@@ -76,3 +76,16 @@ As I've already done several websites, I knew that without ReactJS (or any good 
 
 And finally, Apollo has a really implementation in ReactJS.
 
+# Interface
+
+## Monitor a new site
+
+![popup add monitoring](./images/popup-add-monitoring.png)
+
+To start monitoring a new site, click on the top left button "Monitor a new site", then fill-out the url and interval between two requests.
+
+Once you've added this site, you should see this:
+
+![popup add monitoring](./images/default-layout.png)
+
+On the left, there are every site you're monitoring, in the middle, the details on the last metrics computed for this website, and on the right there are the alerts.
