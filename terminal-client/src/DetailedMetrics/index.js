@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Query, withApollo } from 'react-apollo';
 
-import DetailedLogs from './DetailedLogs';
+import DetailedMetrics from './DetailedMetrics';
 
 import getLastMetrics from '../gql/queries/getLastMetrics.gql';
 import metricsPerformed from '../gql/subscriptions/metricsPerformed.gql';
 
-class DetailedLogsWithGQL extends Component {
+class DetailedMetricsWithGQL extends Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +33,7 @@ class DetailedLogsWithGQL extends Component {
         {({ data }) => {
           if (!data || !data.getLastMetrics) {
             return (
-              <DetailedLogs
+              <DetailedMetrics
                 {...props}
                 url={url}
                 slowMetrics={null}
@@ -42,7 +42,7 @@ class DetailedLogsWithGQL extends Component {
             );
           }
           return (
-            <DetailedLogs
+            <DetailedMetrics
               {...props}
               url={url}
               slowMetrics={data.getLastMetrics.slow}
@@ -55,4 +55,4 @@ class DetailedLogsWithGQL extends Component {
   }
 }
 
-export default withApollo(DetailedLogsWithGQL);
+export default withApollo(DetailedMetricsWithGQL);

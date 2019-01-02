@@ -7,7 +7,7 @@ import AddMonitorButton from './AddMonitorButton';
 import Monitorings from './Monitorings';
 import Alerts from './Alerts';
 import Button from './Button';
-import DetailedLogs from './DetailedLogs';
+import DetailedMetrics from './DetailedMetrics';
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +44,7 @@ class App extends Component {
           style={{ border: { fg: 'blue' } }}
         >
           {selectedMonitoringUrl && (
-            <DetailedLogs url={selectedMonitoringUrl} />
+            <DetailedMetrics url={selectedMonitoringUrl} />
           )}
         </box>
         <box
