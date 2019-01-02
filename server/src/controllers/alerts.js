@@ -57,14 +57,11 @@ const resolveAlert = url => {
         availability: alert.availability,
         resolved: true,
       };
-      console.log('RESOLVE', resolutionToSend);
-      emit.alertGenerated(resolutionToSend);
       alert.isSent = false;
       alert.resolutionTimeoutID = null;
-
-      // Remove alert from cache
-      const alertCacheIndex = alertsCache.findIndex(a => a.url === url);
-      alertsCache.splice(alertCacheIndex, 1);
+      alertsCache.push(resolutionToSend);
+      console.log('RESOLVE', resolutionToSend);
+      emit.alertGenerated(resolutionToSend);
     }, TWO_MIN);
   }
 };

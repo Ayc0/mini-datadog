@@ -14,13 +14,8 @@ class AlertsWithGQL extends Component {
       .subscribe({
         query: alertGenerated,
       })
-      .forEach(({ data }) => {
-        if (data && data.alertGenerated) {
-          // Update cache and dispatch change to modify every components that use the getAlerts query
-          const query = props.client.readQuery({ query: getAlerts });
-          query.getAlerts.push(data.alertGenerated);
-          props.client.writeQuery({ query: getAlerts, data: query });
-        }
+      .forEach(() => {
+        props.client.query({ query: getAlerts });
       });
   }
 
@@ -31,9 +26,11 @@ class AlertsWithGQL extends Component {
           if (!data || !data.getAlerts) {
             return null;
           }
-          return data.getAlerts.map((alert, index) => (
-            <Alert offset={index} key={alert.at} alert={alert} />
-          ));
+          return [...data.getAlerts]
+            .reverse()
+            .map((alert, index) => (
+              <Alert offset={index} key={alert.at} alert={alert} />
+            ));
         }}
       </Query>
     );
