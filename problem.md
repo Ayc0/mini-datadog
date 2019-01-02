@@ -2,7 +2,7 @@
 
 ## Overview
 
-- [ ] Create a console program to monitor performance and availability of websites
+- [x] Create a console program to monitor performance and availability of websites
 - [x] Websites and check intervals are user defined
 - [x] Users can keep the console app running and monitor the websites
 
@@ -16,11 +16,11 @@
 
 ## Alerting
 
-- [ ] When a website availability is below 80% for the past 2 minutes, add a message saying that "Website {website} is down. availability={availability}, time={time}"
-- [ ] When availability resumes for the past 2 minutes, add another message detailing when the alert recovered
-- [ ] Make sure all messages showing when alerting thresholds are crossed remain visible on the page for historical reasons
+- [x] When a website availability is below 80% for the past 2 minutes, add a message saying that "Website {website} is down. availability={availability}, time={time}"
+- [x] When availability resumes for the past 2 minutes, add another message detailing when the alert recovered
+- [x] Make sure all messages showing when alerting thresholds are crossed remain visible on the page for historical reasons
 
 ## Tests & question
 
 - [ ] Write a test for the alerting logic
-- [ ] Explain how you'd improve on this application design
+- [x] Explain how you'd improve on this application design
