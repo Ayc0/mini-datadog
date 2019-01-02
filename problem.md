@@ -22,5 +22,5 @@
 
 ## Tests & question
 
-- [ ] Write a test for the alerting logic
+- [x] Write a test for the alerting logic
 - [x] Explain how you'd improve on this application design

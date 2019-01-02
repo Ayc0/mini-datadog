@@ -19,6 +19,12 @@ If you want to run the server and to restart it at every changes
 yarn start # or npm run start
 ```
 
+## Test
+
+```bash
+yarn test # or npm run test
+```
+
 ## API / GraphIQL
 
 The API we expose is a [GraphQL](https://graphql.org/) API made with [Apollo](https://www.apollographql.com/).

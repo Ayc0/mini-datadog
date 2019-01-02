@@ -3,5 +3,9 @@
   "rules": {
     "prefer-destructuring": "off",
     "no-param-reassign": "off"
+  },
+  "env": {
+    "es6": true,
+    "jest": true
   }
 }
