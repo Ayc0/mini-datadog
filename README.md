@@ -97,3 +97,9 @@ To visualize the detailed metrics, you just have to click on website in the left
 ![Detailed metrics](./images/detailed-metrics.png)
 
 Then you'll see 2 columns: the one on the left contains metrics computed during the last 10 minutes, and the one on the right during the past hour.
+
+## Alerts
+
+When the availability of a website if bellow 80% (and stays bellow 80% for at least 2min), an alert will be sent and it will only be resolved if the availability is over 80% for at least 2min.
+
+![Alerts](./images/alerts.png)
