@@ -1,5 +1,6 @@
 const Bundler = require('parcel-bundler');
 const path = require('path');
+const { spawn } = require('child_process');
 
 if (process.env.NODE_ENV === 'debug') {
   // eslint-disable-next-line
@@ -24,19 +25,33 @@ const options = {
 // Initializes a bundler using the entrypoint location and options provided
 const bundler = new Bundler(entryFiles, options);
 
-let unmount;
+let prog;
 
-bundler.on('buildStart', () => {
-  if (unmount) {
-    unmount();
-    unmount = undefined;
+const selfStoppedPIDs = {};
+
+bundler.on('bundled', async bundle => {
+  if (prog) {
+    prog.kill();
+    selfStoppedPIDs[prog.pid] = true;
+    await new Promise(resolve => {
+      const intervalID = setInterval(() => {
+        if (prog.killed) {
+          resolve(clearInterval(intervalID));
+        }
+      }, 50);
+    });
   }
-});
-
-bundler.on('bundled', bundle => {
-  // eslint-disable-next-line
-  unmount = require(bundle.name).default;
-  delete require.cache[require.resolve(bundle.name)];
+  prog = spawn('node', [bundle.name], {
+    stdio: [process.stdin, process.stdout, process.stderr],
+    detached: false,
+  });
+  prog.on('close', code => {
+    if (selfStoppedPIDs[prog.pid]) {
+      delete selfStoppedPIDs[prog.pid];
+    } else {
+      process.exit(code);
+    }
+  });
 });
 
 bundler.bundle();
