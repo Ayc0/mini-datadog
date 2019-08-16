@@ -1,0 +1,38 @@
+query getLastMetrics($url: String!) {
+  getLastMetrics(url: $url) {
+    fast {
+      id
+      lookupDuration
+      fast
+      lastStatus
+      lastWasError
+      mostFrequentStatus
+      totalRequests
+      totalDuration
+      totalErrors
+      averageServiceTime
+      standardDeviationServiceTime
+      p50ServiceTime
+      p90ServiceTime
+      p95ServiceTime
+      maxServiceTime
+    }
+    slow {
+      id
+      lookupDuration
+      fast
+      lastStatus
+      lastWasError
+      mostFrequentStatus
+      totalRequests
+      totalDuration
+      totalErrors
+      averageServiceTime
+      standardDeviationServiceTime
+      p50ServiceTime
+      p90ServiceTime
+      p95ServiceTime
+      maxServiceTime
+    }
+  }
+}

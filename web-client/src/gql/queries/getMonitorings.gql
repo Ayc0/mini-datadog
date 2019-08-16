@@ -1,0 +1,7 @@
+query getMonitorings {
+  getMonitorings {
+    id
+    url
+    checkInterval
+  }
+}

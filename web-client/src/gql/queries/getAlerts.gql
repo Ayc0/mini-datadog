@@ -1,0 +1,9 @@
+query getAlerts {
+  getAlerts {
+    id
+    url
+    at
+    availability
+    resolved
+  }
+}

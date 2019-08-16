@@ -1,0 +1,19 @@
+subscription metricsPerformed($url: String) {
+  metricsPerformed(url: $url) {
+    id
+    lookupDuration
+    fast
+    lastStatus
+    lastWasError
+    mostFrequentStatus
+    totalRequests
+    totalDuration
+    totalErrors
+    averageServiceTime
+    standardDeviationServiceTime
+    p50ServiceTime
+    p90ServiceTime
+    p95ServiceTime
+    maxServiceTime
+  }
+}

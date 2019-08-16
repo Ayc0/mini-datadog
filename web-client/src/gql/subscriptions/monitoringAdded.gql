@@ -1,0 +1,7 @@
+subscription monitoringAdded {
+  monitoringAdded {
+    id
+    checkInterval
+    url
+  }
+}
