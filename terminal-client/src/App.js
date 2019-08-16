@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 import client from './client';
 
 import AddMonitorButton from './AddMonitorButton';
 import Monitorings from './Monitorings';
-import Alerts from './Alerts';
+// import Alerts from './Alerts';
 import Button from './Button';
-import DetailedMetrics from './DetailedMetrics';
+// import DetailedMetrics from './DetailedMetrics';
 
 class App extends Component {
   constructor(props) {
@@ -43,9 +43,9 @@ class App extends Component {
           border={{ type: 'line' }}
           style={{ border: { fg: 'blue' } }}
         >
-          {selectedMonitoringUrl && (
-            <DetailedMetrics url={selectedMonitoringUrl} />
-          )}
+          {selectedMonitoringUrl && null
+          // <DetailedMetrics url={selectedMonitoringUrl} />
+          }
         </box>
         <box
           label="Alerts log"
@@ -56,7 +56,7 @@ class App extends Component {
           border={{ type: 'line' }}
           style={{ border: { fg: 'blue' } }}
         >
-          <Alerts />
+          {/* <Alerts /> */}
         </box>
         {this.state.showPrompt && (
           <AddMonitorButton
