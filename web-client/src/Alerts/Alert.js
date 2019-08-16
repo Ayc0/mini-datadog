@@ -9,10 +9,10 @@ const Alert = ({ alert: { resolved, url, availability, at }, offset }) => {
     `${cut(availability * 100, 1)}%`,
   )}`;
   return (
-    <Fragment>
+    <div>
       <span>{text}</span>
       <span>At {new Date(at).toLocaleString()}</span>
-    </Fragment>
+    </div>
   );
 };
 
