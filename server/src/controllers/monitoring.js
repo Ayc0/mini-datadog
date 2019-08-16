@@ -39,7 +39,8 @@ const addMonitoring = ({ url, minutes = 0, seconds = 0, millis = 0 }) => {
 };
 
 const getMonitorings = () =>
-  Object.values(monitorings).map(({ checkInterval, url }) => ({
+  Object.values(monitorings).map(({ id, checkInterval, url }) => ({
+    id,
     checkInterval,
     url,
   }));

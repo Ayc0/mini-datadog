@@ -1,6 +1,7 @@
 query getLastMetrics($url: String!) {
   getLastMetrics(url: $url) {
     fast {
+      id
       lookupDuration
       fast
       lastStatus
@@ -17,6 +18,7 @@ query getLastMetrics($url: String!) {
       maxServiceTime
     }
     slow {
+      id
       lookupDuration
       fast
       lastStatus

@@ -1,5 +1,6 @@
 subscription minMetricsPerformed($url: String!) {
   metricsPerformed(url: $url) {
+    id
     lookupDuration
     fast
     lastStatus

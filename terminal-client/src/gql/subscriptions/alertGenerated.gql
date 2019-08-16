@@ -1,5 +1,6 @@
 subscription alertGenerated($url: String) {
   alertGenerated(url: $url) {
+    id
     url
     at
     availability

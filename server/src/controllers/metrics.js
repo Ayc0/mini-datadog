@@ -82,6 +82,7 @@ class Metrics {
     this.saveResponse = this.saveResponse.bind(this);
     this.summary = this.summary.bind(this);
 
+    this.id = url;
     this.url = url;
     this.checkInterval = checkInterval;
     this.requestTimer = null;
@@ -128,6 +129,7 @@ class Metrics {
   saveResponse(status, duration) {
     const instant = Date.now();
     const result = {
+      id: `${this.url}-${instant}`,
       at: instant,
       status: status instanceof Error ? 0 : status,
       error: status instanceof Error,
@@ -165,6 +167,7 @@ class Metrics {
       let metrics = computeMetrics(results);
 
       metrics = {
+        id: `${this.url}-${instant}`,
         url: this.url,
         at: instant,
         lookupDuration,

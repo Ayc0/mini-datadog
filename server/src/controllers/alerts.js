@@ -8,7 +8,8 @@ const alertsCache = [];
 const alerts = {
   /* 
   url: {
-    isSent: Boolean
+    id: string,
+    isSent: Boolean,
     at: timestamp,
     availability: float,
     errorTimeoutID: int | null,
@@ -26,8 +27,10 @@ const registerAlert = url => {
   // If there is no running alerting timeout and the error isn't already sent
   if (alert.errorTimeoutID === null && !alert.isSent) {
     alert.errorTimeoutID = setTimeout(() => {
+      const at = Date.now();
       const alertToSend = {
-        at: Date.now(),
+        id: `${url}-${at}`,
+        at,
         url,
         availability: alert.availability,
         resolved: false,
@@ -51,9 +54,10 @@ const resolveAlert = url => {
   // If alert already sent and no running resolution timeout
   if (alert.isSent && alert.resolutionTimeoutID === null) {
     alert.resolutionTimeoutID = setTimeout(() => {
+      const at = Date.now();
       const resolutionToSend = {
-        at: Date.now(),
-        url,
+        id: `${url}-${at}`,
+        at,
         availability: alert.availability,
         resolved: true,
       };

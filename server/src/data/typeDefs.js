@@ -26,11 +26,13 @@ const typeDefs = gql`
   }
 
   type Monitoring {
+    id: ID!
     url: String!
     checkInterval: Int!
   }
 
   type Request {
+    id: ID!
     at: Timestamp!
     status: Int!
     error: Boolean!
@@ -38,6 +40,7 @@ const typeDefs = gql`
   }
 
   type Metrics {
+    id: ID!
     url: String!
     fast: Boolean!
     lookupDuration: Int!
@@ -62,6 +65,7 @@ const typeDefs = gql`
   }
 
   type Alert {
+    id: ID!
     resolved: Boolean!
     at: Timestamp!
     url: String!

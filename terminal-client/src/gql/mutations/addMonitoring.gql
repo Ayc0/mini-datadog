@@ -10,6 +10,7 @@ mutation addMonitoring(
     seconds: $seconds
     millis: $millis
   ) {
+    id
     url
     checkInterval
   }
